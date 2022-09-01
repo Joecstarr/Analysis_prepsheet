@@ -1,0 +1,1029 @@
+\documentclass[17pt]{extarticle}
+
+
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs}
+\usepackage{times, flexisym, mdframed, xcolor}
+\usepackage{ulem,multicol}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tikz-cd}%   Marginss
+% \usepackage[left=1in,right=1in, top=2in, bottom=2in]{geometry}
+\usepackage[paperwidth= 8in,paperheight=5in,left=.25in,right=.25in, top=.25in, bottom=.25in]{geometry}
+%
+
+\usepackage{draculatheme}
+\mdfdefinestyle{darkAnswer}{%
+fontcolor=draculafg,
+backgroundcolor=draculabg,
+linecolor=draculafg,
+}
+\mdfdefinestyle{darkQuesion}{%
+fontcolor=draculafg,
+backgroundcolor=draculabg,
+linecolor=draculafg,
+linewidth=1pt
+}
+% \mdfdefinestyle{darkAnswer}{%
+%    }
+% \mdfdefinestyle{darkQuesion}{%
+%   linewidth=1pt
+%    }
+
+% --------------------------------------------------------------
+%                         New Commands
+% --------------------------------------------------------------
+\newcommand{\m}{\scalebox{0.5}[1.0]{$-$}}
+\newcommand{\lrb}[1]{\left[#1\right]}
+\newcommand{\lrp}[1]{\left(#1\right)}
+\newcommand{\lrs}[1]{\left\{#1\right\}}
+\newcommand{\lra}[1]{\left<#1\right>}
+\newcommand{\gof}[1]{g\left(#1\right)}
+\newcommand{\fof}[1]{f\left(#1\right)}
+\newcommand{\dof}[1]{d\left(#1\right)}
+\newcommand{\kof}[1]{k\left(#1\right)}
+\newcommand{\mof}[1]{m\left(#1\right)}
+\newcommand{\pof}[1]{\phi\left(#1\right)}
+\newcommand{\om}[1]{m^{\ast}\left(#1\right)}
+\newcommand{\measure}[1]{m\left(#1\right)}
+\newcommand{\supmet}[1]{\left\|#1\right\|_{\infty}}
+\newcommand{\hof}[1]{h\left(#1\right)}
+\newcommand{\met}[3]{\rho_{#1}\lrp{#2,#3}}
+\newcommand{\IR}{\mathscr{R}}
+\newcommand{\rank}[1]{\text{rank}\left(#1\right)}
+\newcommand{\sof}[1]{\sigma\left(#1\right)}
+\newcommand{\Zof}[1]{Z\left(#1\right)}
+\newcommand{\gofinv}[1]{g^{\m1}\left(#1\right)}
+\newcommand{\fofinv}[1]{f^{\m1}\left(#1\right)}
+\newcommand{\Zofinv}[1]{Z^{\m1}\left(#1\right)}
+\newcommand{\pofinv}[1]{\ph{i=1}^{\m1}\left(#1\right)}
+\newcommand{\nmod}[2]{#1\,\left(\text{mod}\,#2\right)}
+\newcommand{\ngcd}[2]{\text{gcd}\left(#1\,,\,#2\right)}
+\newcommand{\nlcm}[2]{\text{lcm}\left(#1\,,\,#2\right)}
+\newcommand{\grp}[2]{\left(#1\,,\,#2\right)}
+\newcommand{\GL}[2]{\mathrm{GL}_{#1}\lrp{#2}}
+\newcommand{\SL}[2]{\mathrm{SL}_{#1}\lrp{#2}}
+\newcommand{\Mn}[2]{M_{#1}\left(#2\right)}
+\newcommand{\nord}[2]{\text{ord}_{#1}\left(#2\right)}
+\newcommand{\ord}[1]{\text{ord}\left(#1\right)}
+\newcommand{\dom}[1]{\text{dom}\left(#1\right)}
+\newcommand{\ran}[1]{\text{ran}\left(#1\right)}
+\newcommand{\degr}[1]{\text{deg}\left(#1\right)}
+\newcommand{\krn}[1]{\text{ker}\left(#1\right)}
+\newcommand{\intr}[1]{\text{int}\left(#1\right)}
+\newcommand{\ball}[2]{B_{#1}\left(#2\right)}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Opn}{\mathcal{O}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\notsubset}{\not\subset}
+% \newcommand{\right)}{\mathbb{R}^{+}}
+\newcommand{\Dn}{\Delta^{n}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\primeDec}{p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_m^{\alpha_m}p_{m+1}^{\alpha_{m+1}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\vert\left\vert#1\right\vert\right\vert}
+\newcommand{\Zm}[1]{\mathbb{Z}_{#1}}
+\newcommand{\Zmx}[1]{\mathbb{Z}_{#1}^{\times}}
+\newcommand{\Zp}{\mathbb{Z}_p}
+\newcommand{\numb}[1]{\noindent{\bf #1)}}
+\newcommand{\bigslant}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+\newcommand{\inv}[1]{#1^{\m1}}
+\newcommand{\totient}[1]{\varphi\left(#1\right)}
+\newcommand{\vhalfpg}{\vspace{5in}}
+\newcommand{\vthirdpg}{\vspace{3in}}
+\newcommand{\vquartpg}{\vspace{2in}}
+\newcommand{\Assoc}[1]{\item[Associativity:]{#1}}
+\newcommand{\Invs}[1]{\item[Inverses:]{#1}}
+\newcommand{\Clos}[1]{\item[Closure:]{#1}}
+\newcommand{\Ident}[1]{\item[Identity:]{#1}}
+\newcommand{\Abel}[1]{\item[Abelian:]{#1}}
+\newcommand{\Tv}{\text{Tv}}
+\newcommand{\V}{\text{V}}
+\newcommand{\Ip}[1]{\text{Im}#1}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+\newcommand{\LS}{\left\lbrace}
+\newcommand{\RS}{\right\rbrace}
+\newcommand{\LB}{\left[}
+\newcommand{\RB}{\right]}
+\newcommand{\MM}{\ \middle|\ }
+\newcommand{\msr}[1]{m\left(#1\right)}
+\newcommand{\dist}[1]{\text{d}\left(#1\right)}
+\newcommand{\Diff}[3]{Diff_{#1}#2\left(#3\right)}
+\newcommand{\Av}[3]{Av_{#1}#2\left(#3\right)}
+\newcommand{\cball}[2]{\overline{B}_{#1}\left(#2\right)}
+\newcommand{\opn}{\mathcal{O}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\wind}[1]{n\lrp{\gamma;\ #1}}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\twocase}[2]{\begin{enumerate}
+                      \item[$ \implies$]{
+                          #1
+                          }
+                      \bigskip
+                      \item[$ \impliedby$]{
+                        #2
+                        }
+                      \end{enumerate}}
+
+% --------------------------------------------------------------
+%                         Renew Commands
+% --------------------------------------------------------------
+% \renewcommand{\det}[1]{\text{det}\left(#1\right)}
+\renewcommand{\bar}[1]{\overline{#1}}
+% \renewcommand{\cos}[1]{\text{cos}\left(#1\right)}
+
+\newcommand{\boxset}[2]{\begin{mdframed}[style=darkQuesion]
+#1
+\end{mdframed}
+\newpage
+\begin{mdframed}[style=darkQuesion]
+#1
+  \end{mdframed}
+\begin{mdframed}[style=darkAnswer]
+#2
+  \end{mdframed}
+  \newpage
+}
+
+\begin{document}
+
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+% \pagestyle{fancy}
+% \fancyhf{}
+% \rhead{Math 5210 Homework 7}
+% \lhead{ }
+% \rfoot{Page \thepage}
+\centering{{\fontsize{26pt}
+{24pt}\selectfont{\underline{\smash{By Heart}}}}}\par
+\newpage
+
+\boxset{The Polar representation of complex numbers }
+{Given a point $z=x+yi$ in the complex plane. The point has a polar representation $\left( r,\ \theta\right):\ x=r\cos{\theta},\ y=r\sin{\theta}$, where $r=\left|z\right|$ and $\theta$ is the angle between the positive real axis and the line segment from $0$ to $z$.}%endboxset
+\boxset{Roots of complex numbers }
+{Given a complex number $a=\left|a\right|\text{cis}\left(\alpha\right)\neq 0$ and an integer $n\geq 2$, a $n^{\text{th}}$ root of $a$ is a number \[\left|a\right|^{\frac{1}{n}}\text{cis}\left( \frac{1}{n}\left( \alpha+2\pi k\right)\right)\] where $0\leq k \leq n-1$ }%endboxset
+\boxset{Lines in $\C$ }
+{A line in $\C$ is of the form \[L=\LS z=a+tb\MM -\infty<t<\infty\RS \] for $a,b\in\C$ or \[L=\left\{z: \operatorname{Im}\left(\frac{z-a}{b}\right)=0\right\}\] }%endboxset
+\boxset{Half planes in $\C$ }
+{For $a,b\in\C$W e are "walking along $L$ in the direction of $b$." If we put \[H_{a}=\left\{z: \operatorname{Im}\left(\frac{z-a}{b}\right)>0\right\}\] then it is easy to see that $H_{a}=a+H_{0} \equiv\left\{a+w: w \in H_{0}\right\}$; that is, $H_{a}$ is the translation of $H_{0}$ by $a$. Hence, $H_{a}$ is the half plane lying to the left of $L$. Similarly, \[K_{a}=\left\{z: \operatorname{Im}\left(\frac{z-a}{b}\right)<0\right\}\] is the half plane on the right of $L$.}%endboxset
+\boxset{The triangle inequality in $\C$ }
+{\[|z+w| \leq|z|+|w|,\;(z, w \in \C)\] where \[|z|=\left(x^{2}+y^{2}\right)^{\frac{1}{2}}\] }%endboxset
+\boxset{The Weierstrass $M$-test for series of functions }
+{ Let $u_{n}: X \rightarrow \C$ be a function such that $\left|u_{n}(x)\right| \leq M_{n}$ for every $x$ in $X$ and suppose the constants satisfy $\sum_{n=1}^{\infty} M_{n}<\infty$. Then $\sum_{1}^{\infty} u_{n}$ is uniformly convergent. }%endboxset
+\boxset{The Heine-Borel Theorem }
+{A subset $K$ of $\R^n$, $n\geq 1$ is compact iff $K$ is closed and bounded.}%endboxset
+\boxset{The Cantor Intersection Theorem }
+{Let $X$ be a metric space. Then $X$ is complete if and only if whenever $\left\{F_{n}\right\}_{n=1}^{\infty}$ is a contracting sequence of nonempty closed subsets of $X$, there is a point $x \in X$ for which $\bigcap_{n=1}^{\infty} F_{n}=\{x\}$}%endboxset
+\boxset{The Cauchy Convergence Criterion }
+{If $(X, d)$ has the property that each Cauchy sequence has a limit in $X$ then $(X, d)$ is complete.}%endboxset
+\boxset{The Intermediate Value Theorem }
+{If $f:[a, b] \rightarrow \mathbb{R}$ is continuous and $f(a) \leq \xi$ $\leq f(b)$ then there is a point $x, a \leq x \leq b$, with $f(x)=\xi$.}%endboxset
+\boxset{Morera's Theorem }
+{ Let $G$ be a region and let $f: G \rightarrow \C$ be a continuous function such that $\int_{T} f=0$ for every triangular path $T$ in $G$; then $f$ is analytic in $G$.}%endboxset
+\boxset{Cauchy's Theorem (Second Version) }
+{If $f: G \rightarrow \C$ is an analytic function and $\gamma$ is a closed rectifiable curve in $G$ such that $\gamma \sim 0$, then \[\int_{\gamma} f=0 \]}%endboxset
+\boxset{Cauchy's Theorem (Fourth Version) }
+{If $G$ is simply connected then  $\int_\gamma f=0$ for every closed rectifiable curve and every analytic function $f$.}%endboxset
+\boxset{Open Mapping Theorem }
+{Let $G$ be a region and suppose that $f$ is a non constant analytic function on $G$. Then for any open set $U$ in $G, f(U)$ is open.}%endboxset
+\boxset{Goursat's Theorem }
+{Let $G$ be an open set and let $f: G \rightarrow \C$ be a differentiable function; then $f$ is analytic on $G$.}%endboxset
+\boxset{Laurent series development of an analytic function in an annulus }
+{Let $f$ be analytic in the annulus ann $\left(a ; R_{1}\right.$, $R_{2}$ ). Then \[f(z)=\sum_{n=-\infty}^{\infty} a_{n}(z-a)^{n}\] where the convergence is absolute and uniform over ann $\left(a ; r_{1}, r_{2}\right)^{-}$if $R_{1}<$ $r_{1}<r_{2}<R_{2}$. Also the coefficients $a_{n}$ are given by the formula \[a_{n}=\frac{1}{2 \pi i} \int_{\gamma} \frac{f(z)}{(z-a)^{n+1}} d z\] where $\gamma$ is the circle $|z-a|=r$ for any $r, R_{1}<r<R_{2}$. Moreover, this series is unique. }%endboxset
+\boxset{Residue Theorem }
+{Let $f$ be analytic in the region $G$ except for the isolated singularities \[\ \] $a_{1}, a_{2}, \ldots, a_{m}$. If $\gamma$ is a closed rectifiable curve in $G$ which does not pass through any of the points $a_{k}$ and if $\gamma \approx 0$ in $G$ then \[\frac{1}{2 \pi i} \int_{\gamma} f=\sum_{k=1}^{m} n\left(\gamma ; a_{k}\right) \operatorname{Res}\left(f ; a_{k}\right) \]}%endboxset
+\boxset{The Argument Principle }
+{Let $f$ be meromorphic in $G$ with poles $p_{1}, p_{2}, \ldots, p_{m}$ and zeros $z_{1}, z_{2}, \ldots, z_{n}$ counted according to multiplicity. If $\gamma$ is a closed rectifiable curve in $G$ with $\gamma \approx 0$ and not passing through $p_{1}, \ldots, p_{m}$; $z_{1}, \ldots, z_{n}$; then \[\frac{1}{2 \pi i} \int_{\gamma} \frac{f^{\prime}(z)}{f(z)} d z=\sum_{k=1}^{n} n\left(\gamma ; z_{k}\right)-\sum_{j=1}^{m} n\left(\gamma ; p_{j}\right) .\] }%endboxset
+\boxset{Rouché's Theorem }
+{ Suppose $f$ and $g$ are meromorphic in a neighborhood of $\bar{B}(a ; R)$ with no zeros or poles on the circle $\gamma=\{z:|z-a|=R\} .$ If $Z_{f}, Z_{g}$ $\left(P_{f}, P_{g}\right)$ are the number of zeros (poles) of $f$ and $g$ inside $\gamma$ counted according to their multiplicities and if \[|f(z)+g(z)|<|f(z)|+|g(z)|\] on $\gamma$, then \[Z_{f}-P_{f}=Z_{g}-P_{g} .\]}%endboxset
+\boxset{Schwarz's Lemma}
+{Let $D=\{z:|z|<1\}$ and Suppose $f$ is analytic on $D$ with\[\ \](a) $|f(z)| \leq 1$ for $z$ in $D$,\[\ \](b) $f(0)=0$.\[\ \]Then $\left|f^{\prime}(0)\right| \leq 1$ and $|f(z)| \leq|z|$ for all $z$ in the disk D. Moreover if $\left|f^{\prime}(0)\right|=1$ or if $|f(z)|=|z|$ for some $z \neq 0$ then there is a constant $c,|c|=1$, such that $f(w)=c w$ for all $w$ in $D$.}%endboxset
+\boxset{The Arzelà-Ascoli Theorem}
+{A set $\mathscr{F} \subset C(G, \Omega)$ is normal iff the following two conditions are satisfied:\[\ \](a) for each $z$ in $G,\{f(z): f \in \mathscr{F}\}$ has compact closure in $\Omega$;\[\ \](b) $\mathscr{F}$ is equicontinuous at each point of $G$.}%endboxset
+\boxset{Hurwitz's Theorem}
+{Let $G$ be a region and suppose the sequence $\left\{f_{n}\right\}$ in $H(G)$ converges to $f .$ If $f \not \equiv 0, \bar{B}(a ; R) \subset G$, and $f(z) \neq 0$ for $|z-a|=R$ then there is an integer $N$ such that for $n \geq N, f$ and $f_{n}$ have the same number of zeros in $B(a ; R)$.}%endboxset
+\boxset{Montel's Theorem}
+{A family $\mathscr{F}$ in $H(G)$ is normal iff $\mathscr{F}$ is locally bounded.}%endboxset
+\boxset{The Riemann Mapping Theorem}
+{Let $G$ be a simply connected region which is not the whole plane and let $a \in G$. Then there is a unique analytic function $f: G \rightarrow \mathbb{C}$ having the properties:\[\ \](a) $f(a)=0$ and $f^{\prime}(a)>0$;\[\ \](b) $f$ is one-one;\[\ \](c) $f(G)=\{z:|z|<1\}$.}%endboxset
+\boxset{Gauss's Formula}
+{For $z \neq 0,-1, \ldots$ \[\Gamma(z)=\lim _{n \rightarrow \infty} \frac{n ! n^{z}}{z(z+1) \ldots(z+n)}\]}%endboxset
+\boxset{Functional Equation for $\Gamma$}
+{For $z \neq 0,-1, \ldots$ \[\Gamma(z+1)=z \Gamma(z)\]}%endboxset
+\boxset{Mean Value Theorem for harmonic functions}
+{If $u: G \rightarrow \mathbb{R}$ is a harmonic function and $\bar{B}(a ; r)$ is a closed disk contained in $G$, then\[u(a)=\frac{1}{2 \pi} \int_{0}^{2 \pi} u\left(a+r e^{i \theta}\right) d \theta\]}%endboxset
+\boxset{Maximum Principle (First Version) for harmonic functions}
+{Let $G$ be a region and suppose that $u$ is a continuous real valued function on $G$ with the MVP. If there is a point a in $G$ such that $u(a) \geq u(z)$ for all $z$ in $G$ then $u$ is a constant function.}%endboxset
+\boxset{Minimum Principle for harmonic functions}
+{Let $G$ be a region and suppose that $u$ is a continuous real valued function on $G$ with the MVP. If there is a point a in $G$ such that $u(a) \leq u(z)$ for all $z$ in $G$ then $u$ is a constant function.}%endboxset
+\boxset{Harnack's Theorem}
+{Let $G$ be a region. (a) The metric space Har( $G)$ is complete. (b) If $\left\{u_{n}\right\}$ is a sequence in $\operatorname{Har}(G)$ such that $u_{1} \leq u_{2} \leq \ldots$ then either $u_{n}(z) \rightarrow \infty$ uniformly on compact subsets of $G$ or $\left\{u_{n}\right\}$ converges in Har $(G)$ to a harmonic function.}%endboxset
+\boxset{The field axioms}
+{
+Commutativity of Addition: For all real numbers $a$ and $b$,
+\[
+a+b=b+a
+\]
+Associativity of Addition: For all real numbers $a, b$, and $c$,
+\[
+(a+b)+c=a+(b+c) .
+\]
+The Additive Identity: There is a real number, denoted by 0 , such that
+\[
+0+a=a+0=a \quad \text { for all real numbers } a
+\]
+The Additive Inverse: For each real number $a$, there is a real number $b$ such that
+\[
+a+b=0
+\]
+Commutativity of Multiplication: For all real numbers $a$ and $b$,
+\[
+a b=b a
+\]
+Associativity of Multiplication: For all real numbers $a, b$, and $c$,
+\[
+(a b) c=a(b c)
+\]
+The Multiplicative Identity: There is a real number, denoted by 1 , such that
+\[
+1 a=a 1=a \quad \text { for all real numbers } a .
+\]
+The Multiplicative Inverse: For each real number $a \neq 0$, there is a real number $b$ such that
+\[
+a b=1 .
+\]
+The Distributive Property: For all real numbers $a, b$, and $c$,
+\[
+a(b+c)=a b+a c
+\]
+The Nontriviality Assumption:
+$1 \neq 0 .$
+}%endboxset
+\boxset{The positivity axioms}
+{
+P1 If $a$ and $b$ are positive, then $a b$ and $a+b$ are also positive.\[\ \]
+P2 For a real number $a$, exactly one of the following three alternatives is true:\[\ \]
+$a$ is positive, $\quad-a$ is positive, $\quad a=0 .$
+}%endboxset
+\boxset{The completeness axiom}
+{
+Let $\mathrm{E}$ be a nonempty set of real numbers that is bounded above. Then among the set of upper bounds for $\mathrm{E}$ there is a smallest, or least, upper bound.
+}%endboxset
+\boxset{Principle of mathematical induction}
+{
+For each natural number $n$, let $S(n)$ be some mathematical assertion. Suppose $S(1)$ is true. Also suppose that whenever $k$ is a natural number for which $S(k)$ is true, then $S(k+1)$ is also true. Then $S(n)$ is true for every natural number $n$.
+}%endboxset
+\boxset{Archimedean Property}
+{
+For each pair of positive real numbers a and b, there is a natural number $n$ for which $n a>b$.
+}%endboxset
+\boxset{The pigeonhole principle}
+{
+The first observation regarding equipotence
+(In the preliminaries we called two sets $A$ and $B$ equipotent provided there is a one-to-one mapping $f$ of $A$ onto $B$.)
+is that for any natural numbers $n$ and $m$, the set $\{1, \ldots, n+m\}$ is not equipotent to the set $\{1, \ldots, n\}$.
+}%endboxset
+\boxset{The Nested Set Theorem}
+{Let $\left\{F_{n}\right\}_{n=1}^{\infty}$ be a descending countable collection of nonempty closed sets of real numbers for which $F_{1}$ bounded. Then
+\[
+\bigcap_{n=1}^{\infty} F_{n} \neq \emptyset
+\]
+}%endboxset
+\boxset{The Bolzano-Weierstrass Theorem}
+{
+Every bounded sequence of real numbers has a convergent subsequence.
+}%endboxset
+\boxset{The Extreme Value Theorem}
+{
+A continuous real-valued function on a nonempty closed, bounded set of real numbers takes a minimum and maximum value.
+}%endboxset
+\boxset{Every interval is a measurable set.}
+{true}%endboxset
+\boxset{The translate of a measurable set is measurable.}
+{true}%endboxset
+\boxset{Continuity of measure}
+{
+Lebesgue measure possesses the following continuity properties:\[\ \]
+(i) If $\left\{A_{k}\right\}_{k=1}^{\infty}$ is an ascending collection of measurable sets, then
+\[
+m\left(\bigcup_{k=1}^{\infty} A_{k}\right)=\lim _{k \rightarrow \infty} m\left(A_{k}\right)
+\]
+(ii) If $\left\{B_{k}\right\}_{k=1}^{\infty}$ is a descending collection of measurable sets and $m\left(B_{1}\right)<\infty$, then
+\[
+m\left(\bigcap_{k=1}^{\infty} B_{k}\right)=\lim _{k \rightarrow \infty} m\left(B_{k}\right)
+\]
+}%endboxset
+\boxset{The Borel-Cantelli Lemma}
+{
+Lemma Let $\left\{E_{k}\right\}_{k=1}^{\infty}$ be a countable collection of measurable sets for which $\sum_{k=1}^{\infty} m\left(E_{k}\right)<\infty$. Then almost all $x \in \mathbf{R}$ belong to at most finitely many of the $E_{k}$ 's.
+}%endboxset
+\boxset{Vitali's Theorem}
+{
+Any set $E$ of real numbers with positive outer measure contains a subset that fails to be measurable.
+}%endboxset
+\boxset{A measurable set that is not Borel}
+{
+There is a measurable set, a subset of the Cantor set, that is not a Borel set.
+}%endboxset
+\boxset{The function $\psi$ maps a non-Borel measurable set to a nonmeasurable set.}
+{
+Let $\varphi$ be the Cantor-Lebesgue function and define the function $\psi$ on $[0,1]$ by
+\[
+\psi(x)=\varphi(x)+x \text { for all } x \in[0,1]
+\]
+Then $\psi$ is a strictly increasing continuous function that maps $[0,1]$ onto $[0,2]$,\[\ \]
+(ii) maps a measurable set, a subset of the Cantor set, onto a nonmeasurable set.
+}%endboxset
+\boxset{A continuous function defined on a measurable set is measurable.}
+{
+true
+}%endboxset
+\boxset{A monotone function defined on an interval is measurable.}
+{
+true
+}%endboxset
+\boxset{The composition of a continuous function and a measurable function is measurable.}
+{
+true
+}%endboxset
+\boxset{The pointwise limit of a sequence of measurable function is measurable.}
+{
+true
+}%endboxset
+\boxset{The Vitali Covering Lemma}
+{
+Let $E$ be a set of finite outer measure and $\mathcal{F}$ a collection of closed, bounded intervals that covers $E$ in the sense of Vitali. Then for each $\epsilon>0$, there is a finite disjoint subcollection $\left\{I_{k}\right\}_{k=1}^{n}$ of $\mathcal{F}$ for which
+\[
+m^{*}\left[E \sim \bigcup_{k=1}^{n} I_{k}\right]<\epsilon
+\]
+}%endboxset
+\boxset{Jordan decomposition of a function of bounded variation}
+{
+We call the expression of a function of bounded variation $f$ as the difference of increasing functions a Jordan decomposition of $f$.
+}%endboxset
+\boxset{Indefinite integral of a Lebesgue integrable function over a closed, bounded interval.}
+{
+We here call a function $f$ on a closed, bounded interval $[a, b]$ the indefinite integral of $g$ over $[a, b]$ provided $g$ is Lebesgue integrable over $[a, b]$ and
+\[
+f(x)=f(a)+\int_{a}^{x} g \text { for all } x \in[a, b]
+\]
+}%endboxset
+\boxset{Additivity over domains of integration}
+{
+Let $f$ be integrable over $E$. Assume $A$ and $B$ are disjoint measurable subsets of $E$. Then
+\[
+\int_{A \cup B} f=\int_{A} f+\int_{B} f .
+\]
+}%endboxset
+\boxset{Lebesgue's Theorem on Riemann integrability}
+{
+Let $f$ be a bounded function on the closed, bounded interval $[a, b]$. Then $f$ is Riemann integrable over $[a, b]$ if and only if the set of points in $[a, b]$ at which $f$ fails to be continuous has measure zero.
+}%endboxset
+\boxset{Jordan's Theorem}
+{
+A function $f$ is of bounded variation on the closed, bounded interval $[a, b]$ if and only if it is the difference of two increasing functions on $[a, b]$.
+}%endboxset
+\boxset{Lebesgue Decomposition for a function of bounded variation}
+{
+The above decomposition of a function of bounded variation $f$ as the sum $g+h$ of two functions of bounded variation, where $g$ is absolutely continuous and $h$ is singular, is called a Lebesgue decomposition of $f$.
+}%endboxset
+\boxset{Young's Inequality}
+{
+For $1<p<\infty, q$ the conjugate of $p$, and any two positive numbers a and $b$,
+\[
+a b \leq \frac{a^{p}}{p}+\frac{b^{q}}{q}
+\]
+}%endboxset
+\boxset{Holder's Inequality}
+{
+Let $E$ be a measurable set, $1 \leq p<\infty$, and $q$ the conjugate of $p$. If $f$ belongs to $L^{p}(E)$ and $g$ belongs to $L^{q}(E)$, then their product $f \cdot g$ is integrable over $E$ and Hölder's Inequality
+Moreover, if $f \neq 0$, the function ${ }^{2} f^{*}=\|f\|_{p}^{1-p} \cdot \operatorname{sgn}(f) \cdot|f|^{p-1}$ belongs to $L^{q}(X, \mu)$,
+\[
+\int_{E} f \cdot f^{*}=\|f\|_{p} \text { and }\left\|f^{*}\right\|_{q}=1
+\]
+It is convenient, for $f \in L^{p}(E), f \neq 0$, to call the function $f^{*}$ defined above the conjugate function of $f$.
+}%endboxset
+\boxset{Minkowski's Inequality}
+{
+Let $E$ be a measurable set and $1 \leq p \leq \infty$. If the functions $f$ and $g$ belong to $L^{p}(E)$, then so does their sum $f+g$ and, moreover,
+\[
+\|f+g\|_{p} \leq\|f\|_{p}+\|g\|_{p}
+\]
+}%endboxset
+\boxset{The Cauchy-Schwarz Inequality}
+{
+Let $E$ be a measurable set and $f$ and $g$ measurable functions on $E$ for which $f^{2}$ and $g^{2}$ are integrable over $E$. Then their product $f \cdot g$ also is integrable over $E$ and
+\[
+\int_{E}|f g| \leq \sqrt{\int_{E} f^{2}} \cdot \sqrt{\int_{E} g^{2}}
+\]
+}%endboxset
+\boxset{The Riesz-Fischer Theorem}
+{
+Let $E$ be a measurable set and $1 \leq p \leq \infty$. Then $L^{p}(E)$ is a Banach space. Moreover, if $\left\{f_{n}\right\} \rightarrow f$ in $L^{p}(E)$, a subsequence of $\left\{f_{n}\right\}$ converges pointwise a.e. on $E$ to $f$.
+}%endboxset
+\boxset{The Riesz Representation Theorem for the Dual of $L^{p}(E)$}
+{
+Let $E$ be a measurable set, $1 \leq p<\infty$, and q the conjugate of $p$. For each $g \in L^{q}(E)$, define the bounded linear functional $\mathcal{R}_{g}$ on $L^{p}(E)$ by
+\[
+\mathcal{R}_{g}(f)=\int_{E} g \cdot f \text { for all } f \text { in } L^{p}(E)
+\]
+Then for each bounded linear functional $T$ on $L^{p}(E)$, there is a unique function $g \in L^{q}(E)$ for which
+\[
+\mathcal{R}_{g}=T, \text { and }\|T\|_{*}=\|g\|_{q} .
+\]
+}%endboxset
+\boxset{$\epsilon-\delta$ Criterion for Continuity}
+{
+A mapping $f$ from a metric space $(X, \rho)$ to a metric space $(Y, \sigma)$ is continuous at the point $x \in X$ if and only if for every $\epsilon>0$, there is $a \delta>0$ for which if $\rho\left(x, x^{\prime}\right)<\delta$, then $\sigma\left(f(x), f\left(x^{\prime}\right)\right)<\epsilon$, that is,
+\[
+f(B(x, \delta)) \subseteq B(f(x), \epsilon)
+\]
+}%endboxset
+\boxset{The Lebesgue Covering Lemma}
+{
+Let $\left\{\mathcal{O}_{\lambda}\right\}_{\lambda \in \Lambda}$ be an open cover of a compact metric space $X$. Then there is a number $\epsilon>0$, such that for each $x \in X$, the open ball $B(x, \epsilon)$ is contained in some member of the cover.
+}%endboxset
+
+
+
+
+
+\centering{{\fontsize{26pt }
+{24pt}\selectfont{\underline{\smash{Define}}}}}\par \newpage
+\boxset{Connectedness }
+{ A metric space $(X, d)$ is connected if the only subsets of $X$ which are both open and closed are $\square$ and $X$. If $A \subset X$ then $A$ is a connected subset of $X$ if the metric space $(A, d)$ is connected.}%endboxset
+\boxset{Cauchy sequence }
+{ A sequence $\left\{x_{n}\right\}$ is called a Cauchy sequence if for every $\epsilon>0$ there is an integer $N$ such that $d\left(x_{n}, x_{m}\right)<\epsilon$ for all $n, m \geq N$.}%endboxset
+\boxset{Uniform convergence }
+{Let $X$ be a set and $(\Omega, \rho)$ a metric space and suppose $f, f_{1}, f_{2}, \ldots$ are functions from $X$ into $\Omega$. The sequence $\left\{f_{n}\right\}$ converges uniformly to $f$-written $f=u-\lim f_{n}$-if for every $\epsilon>0$ there is an integer $N$ (depending on $\epsilon$ alone) such that $\rho\left(f(x), f_{n}(x)\right)<\epsilon$ for all $x$ in $X$, whenever $n \geq N$.}%endboxset
+\boxset{Analytic function }
+{ A function $f: G \rightarrow \C$ is analytic if $f$ is continuously differentiable on $G$.}%endboxset
+\boxset{Principal branch of the logarithm }
+{ If $G$ is an open connected set in $\C$ and $f: G \rightarrow \C$ is a continuous function such that $z=\exp f(z)$ for all $z$ in $G$ then $f$ is a branch of the logarithm. We designate the particular branch of the logarithm defined above on $\C-\{z: z \leq 0\}$ to be the principal branch of the logarithm.}%endboxset
+\boxset{Definition of Mobius map }
+{ A mapping of the form $S(z)=\frac{a z+b}{c z+d}$ is called a linear fractional transformation. If $a, b, c$, and $d$ also satisfy $a d-b c \neq 0$ then $S(z)$ is called a Mobius transformation.}%endboxset
+\boxset{Symmetry Principle }
+{ If a Mobius transformation $T$ takes a circle $\Gamma_{1}$ onto the circle $\Gamma_{2}$ then any pair of points symmetric with respect to $\Gamma_{1}$ are mapped by $T$ onto a pair of points symmetric with respect to $\Gamma_{2}$.}%endboxset
+\boxset{Orientation Principle }
+{ Let $\Gamma_{1}$ and $\Gamma_{2}$ be two circles in $\C_{\infty}$ and let $T$ be a Mobius transformation such that $T\left(\Gamma_{1}\right)=\Gamma_{2}$. Let $\left(z_{1}, z_{2}, z_{3}\right)$ be an orientation for $\Gamma_{1}$. Then $T$ takes the right side and the left side of $\Gamma_{1}$ onto the right side and left side of $\Gamma_{2}$ with respect to the orientation $\left(T z_{1}, T z_{2}, T z_{3}\right)$.}%endboxset
+\boxset{Riemann-Stieltjes integral }
+{ Let $\gamma:[a, b] \rightarrow \C$ be of bounded variation and suppose that $f:[a, b] \rightarrow \C$ is continuous. Then there is a complex number I such that for every $\epsilon>0$ there is a $\delta>0$ such that when $P=\left\{t_{0}<t_{1}<\ldots<t_{m}\right\}$ is a partition of $[a, b]$ with $\|P\|=\max \left\{\left(t_{k}-t_{k-1}\right): 1 \leq k \leq m\right\}<\delta$ then \[\abs{I-\sum_{k=1}^m f\LP\tau_k\RP\LB\gamma\LP t_k\RP-\LP t_{k-1}\RP\RB}<\varepsilon\] for whatever choice of points $\tau_{k}, t_{k-1} \leq \tau_{k} \leq t_{k}$. This number $I$ is called the integral of $f$ with respect to $\gamma$ over $[a, b]$ and is designated by \[I=\int_{a}^{b} f d \gamma=\int_{a}^{b} f(t) d \gamma(t) .\] }%endboxset
+\boxset{Cauchy's Estimate }
+{ Let $f$ be analytic in $B(a ; R)$ and suppose $|f(z)| \leq M$ for all $z$ in $B(a ; R)$. Then \[\left|f^{(n)}(a)\right| \leq \frac{n ! M}{R^{n}}\] }%endboxset
+\boxset{Liouville's Theorem }
+{ If $f$ is a bounded entire function then $f$ is constant.}%endboxset
+\boxset{Fundamental Theorem of Algebra }
+{ If $p(z)$ is a non constant polynomial then there is a complex number $a$ with $p(a)=0$.}%endboxset
+\boxset{Maximum Modulus Theorem }
+{ If $G$ is a region and $f: G \rightarrow \C$ is an analytic function such that there is a point $a$ in $G$ with $|f(a)| \geq|f(z)|$ for all $z$ in $G$, then $f$ is constant.}%endboxset
+\boxset{Index of a closed rectifiable curve $\gamma$ in $\C$ with respect to a point $a \notin \gamma$ }
+{ If $\gamma$ is a closed rectifiable curve in $\C$ then for $a \notin\{\gamma\}$ \[n(\gamma ; a)=\frac{1}{2 \pi i} \int_{\gamma}(z-a)^{-1} d z\]  is called the index of $\gamma$ with respect to the point $a$. It is also sometimes called the winding number of $\gamma$ around $a$.}%endboxset
+\boxset{When is an open set simply connected? }
+{ An open set $G$ is simply connected if $G$ is connected and every closed curve in $G$ is homotopic to zero.}%endboxset
+\boxset{A rectifiable curve homologous to zero }
+{ If $G$ is an open set then $\gamma$ is homologous to zero, in symbols $\gamma \approx 0$, if $n(\gamma ; w)=0$ for all $w$ in $\C-G$.}%endboxset
+\boxset{Removable singularity of an analytic function at a point $z=a$ }
+{ A function $f$ has an isolated singularity at $z=a$ if there is an $R>0$ such that $f$ is defined and analytic in $B(a ; R)-\{a\}$ but not in $B(a ; R)$. The point $a$ is called a removable singularity if there is an analytic function $g: B(a ; R) \rightarrow \C$ such that $g(z)=f(z)$ for $0<|z-a|<R$.}%endboxset
+\boxset{Pole of a function }
+{If $z=a$ is an isolated singularity of $f$ then $a$ is a pole of $f$ if $\lim _{z \rightarrow a}|f(z)|=\infty$. That is, for any $M>0$ there is a number $\epsilon>0$ such that $|f(z)| \geq M$ whenever $0<|z-a|<\epsilon$. If an isolated singularity is neither a pole nor a removable singularity it is called an essential singularity.}%endboxset
+\boxset{Cauchy's Integral Formula (First Version) }
+{Let $G$ be an open subset of the plane and $f: G \rightarrow \mathbb{C}$ an analytic function. If $\gamma$ is a closed rectifiable curve in $G$ such that $n(\gamma ; w)=0$ for all $w$ in $\mathbb{C}-G$, then for $a$ in $G-\{\gamma\}$ \[n(\gamma ; a) f(a)=\frac{1}{2 \pi i} \int_{\gamma} \frac{f(z)}{z-a} d z .\]}%endboxset
+\boxset{Cauchy's Integral Formula (Second Version) }
+{Let $G$ be an open subset of the plane and $f: G \rightarrow \mathbb{C}$ an analytic function. If $\gamma_{1}, \ldots, \gamma_{m}$ are closed rectifiable curves in $G$ such that $n\left(\gamma_{1} ; w\right)+\cdots+n\left(\gamma_{m} ; w\right)=0$ for all $w$ in $\mathbb{C}-G$, then for a in $G-\cup_{k=1}^{m}\left\{\gamma_{k}\right\}$ \[f(a) \sum_{k=1}^{m} n\left(\gamma_{k} ; a\right)=\sum_{k=1}^{m} \frac{1}{2 \pi i} \int_{\gamma_{k}} \frac{f(z)}{z-a} d z .\]}%endboxset
+\boxset{ If $f$ is analytic on an open connected set $G$ and $f$ is $\rule{1cm}{0.15mm}$, then for each $a$ in $G$ with $\rule{1cm}{0.15mm}$ there is an integer $n \geq 1$ and an $\rule{1cm}{0.15mm}$ $g: G \rightarrow \mathbb{C}$ such that $\rule{1cm}{0.15mm}$ and for all $z$ in $G$. That is, $\rule{1cm}{0.15mm}$  }
+{ If $f$ is analytic on an open connected set $G$ and $f$ is not identically zero, then for each a in $G$ with $f(a)=0$ there is an integer $n \geq 1$ and an analytic function $g: G \rightarrow \mathbb{C}$ such that $g(a) \neq 0$ and \[f(z)=(z-a)^{n} g(z)\] for all $z$ in $G$. That is, each zero of $f$ has finite multiplicity.}%endboxset
+\boxset{ If $\gamma:[0,1] \rightarrow \mathbb{C}$ is a closed rectifiable curve and $a \notin\{\gamma\}$ then \[\rule{1cm}{0.15mm}\] is an $\rule{1cm}{0.15mm}$.}
+{ If $\gamma:[0,1] \rightarrow \mathbb{C}$ is a closed rectifiable curve and $a \notin\{\gamma\}$ then \[\frac{1}{2 \pi i} \int_{\gamma} \frac{d z}{z-a}\] is an integer.}%endboxset
+\boxset{ If $\gamma:[0,1] \rightarrow \mathbb{C}$ is a closed rectifiable curve and $a \notin\{\gamma\}$ then \[\rule{1cm}{0.15mm}\] is an $\rule{1cm}{0.15mm}$.}
+{ If $\gamma:[0,1] \rightarrow \mathbb{C}$ is a closed rectifiable curve and $a \notin\{\gamma\}$ then \[\frac{1}{2 \pi i} \int_{\gamma} \frac{d z}{z-a}\] is an integer.}%endboxset
+\boxset{  Let $\gamma$ be a closed rectifiable curve in $\mathbb{C}$. Then\[\ \] (i) $n(\gamma ; a)$ $\rule{1cm}{0.15mm}$ of $G=\mathbb{C}-\{\gamma\}$; and\[\ \] (ii) $n(\gamma ; a)=0$ for $a$ belonging $\rule{1cm}{0.15mm}$ $G$. }
+{ Let $\gamma$ be a closed rectifiable curve in $\mathbb{C}$. Then\[\ \] (i) $n(\gamma ; a)$ is constant for $a$ belonging to a component of $G=\mathbb{C}-\{\gamma\}$; and\[\ \] (ii) $n(\gamma ; a)=0$ for $a$ belonging to the unbounded component of $G$. is an integer.}%endboxset
+\boxset{Cauchy's Theorem for functions analytic in a disk }
+{if $G$ is an open disk then \[\int_{\gamma} f=0\] for any analytic function $f$ on $G$ and any closed rectifiable curve $\gamma$ in $G$.}%endboxset
+\boxset{Cauchy's Integral Formula for Derivatives }
+{Let $G$ be an open subset of the plane and $f: G \rightarrow \mathbb{C}$ be an analytic function. Let $\gamma_{1}, \ldots, \gamma_{m}$ be closed rectifiable curves in $G$ such that \[n\left(\gamma_{1} ; w\right)+\cdots+n\left(\gamma_{m} ; w\right)=0\] for all $w$ in $\mathbb{C}-G$. Then for $a$ in $G-\{\gamma\}$ and $k \geq 1$, we have \[f^{(k)}(a) \sum_{j=1}^{m} n\left(\gamma_{j} ; a\right)=k ! \sum_{j=1}^{m} \frac{1}{2 \pi i} \int_{\gamma,} \frac{f(z)}{(z-a)^{k+1}} d z\]}%endboxset
+\boxset{   A region $G$ is $\rule{1cm}{0.15mm}$ if and only if $\mathbb{C}_{\infty}-G$, its complement in the extended plane, is connected in $\mathbb{C}_{\infty}$.  }
+{A region $G$ is simply connected if and only if $\mathbb{C}_{\infty}-G$, its complement in the extended plane, is connected in $\mathbb{C}_{\infty}$.}%endboxset
+\boxset{   Let $G$ be $\rule{1cm}{0.15mm}$ and let $f: G \rightarrow \mathbb{C}$ be an analytic function such the $f(z) \neq 0$ for any $z$ in $G$. Then there exists an analytic function $g: G \rightarrow \mathbb{C}$ such that $\rule{1cm}{0.15mm}$. If $z_{0} \in G$ and $e^{w_{0}}=f\left(z_{0}\right)$, we may choose $g$ such that $\rule{1cm}{0.15mm}$  }
+{   Let $G$ be simply connected and let $f: G \rightarrow \mathbb{C}$ be an analytic function such the $f(z) \neq 0$ for any $z$ in $G$. Then there exists an analytic function $g: G \rightarrow \mathbb{C}$ such that $f(z)=\exp g(z)$. If $z_{0} \in G$ and $e^{w_{0}}=f\left(z_{0}\right)$, we may choose $g$ such that $g\left(z_{0}\right)=w_{0}$ }%endboxset
+\boxset{Let $z=a$ be an isolated singularity of $f$ and let $f(z)=\sum_{-\infty}^{\infty} a_{n}(z-a)^{n}$ be its Laurent Expansion in ann $(a ; 0, R)$. Then:\[\ \] (a) $z=a$ is a $\rule{1cm}{0.15mm}$ if and only if $a_{n}=0$ for $n \leq-1$;\[\ \] (b) $z=a$ is a $\rule{1cm}{0.15mm}$ of order $m$ if and only if $a_{-m} \neq 0$ and $a_{n}=0$ for $n \leq-(m+1)$;\[\ \] (c) $z=a$ is an$\rule{1cm}{0.15mm}$ if and only if $a_{n} \neq 0$ for infinitely many negative integers $n$. }
+{Let $z=a$ be an isolated singularity of $f$ and let $f(z)=\sum_{-\infty}^{\infty} a_{n}(z-a)^{n}$ be its Laurent Expansion in ann $(a ; 0, R)$. Then:\[\ \] (a) $z=a$ is a removable singularity if and only if $a_{n}=0$ for $n \leq-1$;\[\ \] (b) $z=a$ is a pole of order $m$ if and only if $a_{-m} \neq 0$ and $a_{n}=0$ for $n \leq-(m+1)$;\[\ \] (c) $z=a$ is an essential singularity if and only if $a_{n} \neq 0$ for infinitely many negative integers $n$.}%endboxset
+\boxset{Suppose $f$ has a pole of order $m$ at $z=a$ and put $g(z)=\rule{1cm}{0.15mm}$; then \[\rule{1cm}{0.15mm}\] }
+{   Suppose $f$ has a pole of order $m$ at $z=a$ and put $g(z)=(z-a)^{m} f(z)$; then \[\operatorname{Res}(f ; a)=\frac{1}{(m-1) !} g^{(m-1)}(a)\] }%endboxset
+\boxset{Polynomially convex hull of a compact set}
+{Let $K$ be a compact subset of the plane; the polynomially convex hull of $K$, denoted by $\hat{K}$, is defined to be the set of all points $w$ such that for every polynomial $p$\[|p(w)| \leq \max \{|p(z)|: z \in K\} .\] That is, if the right hand side of this inequality is denoted by $\|p\|_{K}$, then \[\hat{K}=\left\{w:|p(w)| \leq\|p\|_{K} \text { for all polynomials } p\right\} .\]}%endboxset
+\boxset{harmonic conjugate}
+{If $f: G \rightarrow \mathbb{C}$ is an analytic function then $u=\operatorname{Re} f$ and $v=\operatorname{Im} f$ are called harmonic conjugates.}%endboxset
+\boxset{Harmonic function}
+{If $G$ is an open subset of $\mathbb{C}$ then a function $u: G \rightarrow \mathbb{R}$ is harmonic if $u$ has continuous second partial derivatives and\[\frac{\partial^{2} u}{\partial x^{2}}+\frac{\partial^{2} u}{\partial y^{2}}=0\]}%endboxset
+\boxset{$C(G, \Omega)$}
+{If $G$ is an open set in $\mathbb{C}$ and $(\Omega, d)$ is a complete metric space then designate by $C(G, \Omega)$ the set of all continuous functions from $G$ to $\Omega$.}%endboxset
+\boxset{equicontinuous}
+{A set $\mathscr{F} \subset C(G, \Omega)$ is equicontinuous at a point $z_{0}$ in $G$ iff for every $\epsilon>0$ there is a $\delta>0$ such that for $\left|z-z_{0}\right|<\delta$,\[d\left(f(z), f\left(z_{0}\right)\right)<\epsilon\]for every $f$ in $\mathscr{F} . \mathscr{F}$ is equicontinuous over a set $E \subset G$ if for every $\epsilon>0$ there is a $\delta>0$ such that for $z$ and $z^{\prime}$ in $E$ and $\left|z-z^{\prime}\right|<\delta$,\[d\left(f(z), f\left(z^{\prime}\right)\right)<\epsilon\]}%endboxset
+\boxset{normal}
+{A set $\mathscr{F} \subset C(G, \Omega)$ is normal if each sequence in $\mathscr{F}$ has a subsequence which converges to a function $f$ in $C(G, \Omega)$.}%endboxset
+\boxset{Series representation for $e^z$}
+{\[\sum_{k=0}^{\infty} \frac{z^{k}}{k !}\]}%endboxset
+\boxset{Series representation for $\log(z)$}
+{\[\sum_{k=1}^{\infty}(-1)^{k+1} \frac{(z-1)^{k}}{k}\]}%endboxset
+\boxset{Series representation for $\sin(z)$}
+{\[\sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2 n+1) !} z^{2 n+1}\]}%endboxset
+\boxset{Series representation for $\cos(z)$}
+{\[\sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2 n) !} z^{2 n}\]}%endboxset
+\boxset{Automorphisms of the unit disk}
+{\[f(z)=\frac{z_{1}-z}{1-\bar{z}_{1} z} e^{i \theta}\] sends $z_1$ to zero}%endboxset
+\boxset{The Simple Approximation Lemma}
+{Let $f$ be a measurable real-valued function on $E$. Assume $f$ is bounded on $E$, that is, there is an $M>0$ for which $|f| \leq M$ on $E$. Then for each $\epsilon>0$, there are simple functions $\varphi_{\epsilon}$ and $\psi_{\epsilon}$ defined on $E$ which have the following approximation properties:
+\[
+\varphi_{\epsilon} \leq f \leq \psi_{\epsilon} \text { and } 0 \leq \psi_{\epsilon}-\varphi_{\epsilon}<\epsilon \text { on } E
+\]
+}%endboxset
+\boxset{The Simple Approximation Theorem.}
+{An extended real-valued function $f$ on a measurable set $E$ is measurable if and only if there is a sequence $\left\{\varphi_{n}\right\}$ of simple functions on $E$ which converges pointwise on $E$ to $f$ and has the property that
+\[
+\left|\varphi_{n}\right| \leq|f|
+\]
+on $E$ for all $n$. If $f \geq 0$, we may choose $\left\{\varphi_{n}\right\}$ to be increasing.}%endboxset
+\boxset{Egoroff's Theorem}
+{Assume $E$ has finite measure. Let $\left\{f_{n}\right\}$ be a sequence of measurable functions on $E$ that converges pointwise on $E$ to the real-valued function $f$. Then for each $\epsilon>0$ there is a closed set $F$ contained in $E$ for which
+\[
+\left\{f_{n}\right\} \rightarrow f \text { uniformly on } F \text { and } m(E \sim F)<\epsilon .
+\]
+}%endboxset
+\boxset{Lusin's Theorem }
+{Let $f$ be a real-valued measurable function on $E$. Then for each $\epsilon>0$, there is a continuous function $g$ on $\mathbb{R}$ and a closed set $F$ contained in $E$ for which $f=g$ on $F$ and $m(E \sim F)<\epsilon$.}%endboxset
+\boxset{Continuous, Borel, and measurable functions}
+{
+$f$ is continuous $\Longleftrightarrow$ for every open set $\mathcal{O}$ we have $f^{-1}(\mathcal{O})$ is open.\[\ \]
+$f$ is Borel $\Longleftrightarrow$ for every open set $\mathcal{O}$ we have $f^{-1}(\mathcal{O})$ is Borel.\[\ \]
+$f$ is measurable $\Longleftrightarrow$ for every open set $\mathcal{O}$ we have $f^{-1}(\mathcal{O})$ is measurable.\[\ \]
+}%endboxset
+\boxset{The Bounded Convergence Theorem}
+{Let $\left\{f_{n}\right\}$ be a sequence of measurable functions on a set of finite measure $E$. Suppose $\left\{f_{n}\right\}$ is uniformly pointwise bounded on $E$, that is, there is a number $M \geq 0$ for which
+\[
+\left|f_{n}\right| \leq M
+\]
+on $E$ for all $n$. If $\left\{f_{n}\right\} \rightarrow f$ pointwise on $E$, then
+\[
+\lim _{n \rightarrow \infty} \int_{E} f_{n}=\int_{E} f .
+\]
+}%endboxset
+\boxset{Chebychev's Inequality}
+{Let $f$ be a nonnegative measurable function on $E$. Then for any $\lambda>0$,
+\[
+m(\{x \in E: f(x) \geq \lambda\}) \leq \frac{1}{\lambda} \cdot \int_{E} f
+\]
+}%endboxset
+\boxset{Fatou's Lemma}
+{Let $\left\{f_{n}\right\}$ be a sequence of nonnegative measurable functions on $E$. If $\left\{f_{n}\right\} \rightarrow f$ pointwise a.e. on $E$, then
+\[
+\int_{E} f \leq \liminf \int_{E} f_{n}
+\]
+}%endboxset
+\boxset{The Monotone Convergence Theorem}
+{Let $\left\{f_{n}\right\}$ be an increasing sequence of nonnegative measurable functions on $E$. Assume that $f_{n} \rightarrow f$ pointwise a.e. on $E$. Then
+\[
+\lim _{n} \int_{E} f_{n}=\int_{E} f .
+\]
+}%endboxset
+\boxset{Beppo Levi's Lemma}
+{Let $\left\{f_{n}\right\}$ be an increasing sequence of nonnegative measurable functions on $E$. If the sequence of integrals $\left\{\int_{E} f_{n}\right\}$ is bounded, then $\left\{f_{n}\right\}$ converges pointwise on $E$ to a measurable function $f$ that is finite a.e. on $E$ and
+\[
+\lim _{n} \int_{E} f_{n}=\int_{E} f<\infty
+\]
+}%endboxset
+\boxset{The Vitali Convergence Theorem}
+{Let $E$ be of finite measure. Suppose the sequence of functions $\left\{f_{n}\right\}$ is uniformly integrable over $E$. If $f_{n} \rightarrow f$ pointwise a.e. on $E$, then $f$ is integrable over $E$ and
+\[
+\lim _{n} \int_{E} f_{n}=\int_{E} f
+\]
+}%endboxset
+\boxset{The Lebesgue Dominated Convergence Theorem}
+{Let $\left\{f_{n}\right\}$ be a sequence of measurable functions on $E$. Suppose there is a function $g$ that is integrable over $E$ and dominates $\left\{f_{n}\right\}$ on $E$ in the sense that
+\[
+\left|f_{n}(x)\right| \leq g(x)
+\]
+for all $x \in E$ and for all $n \in \mathbb{N}$. If $f_{n} \rightarrow f$ pointwise a.e. on $E$, then $f$ is integrable over $E$ and
+\[
+\lim _{n} \int_{E} f_{n}=\int_{E} f .
+\]
+}%endboxset
+\boxset{(Riesz)}
+{If $\left\{f_{n}\right\} \rightarrow f$ in measure on $E$, then there is a subsequence $\left\{f_{n_{k}}\right\}$ that converges pointwise a.e. on $E$ to $f$.}%endboxset
+\boxset{Lebesgue's Theorem}
+{If the function $f$ is monotone on the open interval $(a, b)$, then it is differentiable almost everywhere on $(a, b)$.}%endboxset
+\boxset{Theorem 6.8 Let the function $f$ be absolutely continuous on the closed, bounded interval $[a, b]$.}
+{Then $f$ is the difference of increasing absolutely continuous functions and, in particular, is of bounded variation.}%endboxset
+\boxset{Theorem 6.11 A function $f$ on a closed, bounded interval $[a, b]$ is absolutely continuous on $[a, b]$ if and only if}
+{it is an indefinite integral over $[a, b]$.}%endboxset
+\boxset{Theorem 6.14 Let $f$ be integrable over the closed, bounded interval $[a, b]$.}
+{Then $\frac{d}{d x}\left[\int_{a}^{x} f\right]=f(x) \quad$ for almost all $x \in(a, b) .$}%endboxset
+\boxset{Theorem 7.6 Let $E$ be a measurable set and $1 \leq p \leq \infty$.}
+{Then every rapidly Cauchy sequence in $L^{p}(E)$ converges both with respect to the $L^{p}(E)$ norm and pointwise a.e. on $E$ to a function in $L^{p}(E)$.}%endboxset
+\boxset{Theorem $7.7$ Let $E$ be a measurable set and $1 \leq p<\infty$. Suppose $\left\{f_{n}\right\}$ is a sequence in $L^{p}(E)$ that converges pointwise a.e. on $E$ to the function $f$ which belongs to $L^{p}(E)$.}
+{Then
+\[
+\left\{f_{n}\right\} \rightarrow f \text { in } L^{p}(E) \Longleftrightarrow \lim _{n} \int_{E}\left|f_{n}\right|^{p}=\int_{E}|f|^{p} .
+\]
+}%endboxset
+\boxset{Theorem 7.12 Let $E$ be a measurable set and $1 \leq p<\infty$.}
+{Then $C_{c}(E)$ is dense in $L^{p}(E)$.}%endboxset
+\boxset{Theorem 9.12 The following are complete metric spaces}
+{
+(i) Each nonempty closed subset of Euclidean space $\mathbb{R}^{n}$.\[\ \]
+(ii) For $E$ a measurable set of real numbers and $1 \leq p \leq \infty$, each nonempty closed subset of $L^{p}(E)$.\[\ \]
+(iii) Each nonempty closed subset of $C[a, b]$.
+}%endboxset
+\boxset{Theorem 9.16 (Characterization of Compactness for a Metric Space)}
+{For a metric space $X$, the following three assertions are equivalent:
+(i) $X$ is complete and totally bounded;\[\ \]
+(ii) $X$ is compact;\[\ \]
+(iii) $X$ is sequentially compact.\[\ \]
+}%endboxset
+\boxset{Theorem $9.27$ The following are separable metric spaces:}
+{
+(i) Each nonempty subset of Euclidean space $\mathbb{R}^{n}$;\[\ \]
+(ii) For $E$ a Lebesgue measurable set of real numbers and $1 \leq p<\infty$, each nonempty subset of $L^{p}(E)$;\[\ \]
+(iii) Each nonempty subset of $C[a, b]$.\[\ \]
+}%endboxset
+\boxset{The Baire Category Theorem Let $X$ be a complete metric space.}
+{
+(i) Let $\left\{\mathcal{O}_{n}\right\}$ be a countable collection of open dense sets of $X$. Then the intersection $\bigcap_{n} \mathcal{O}_{n}$ is also dense.
+(ii) Let $\left\{F_{n}\right\}$ be a countable collection of closed hollow subsets of $X$. then the union $\bigcup_{n} F_{n}$ is also hollow.\[\ \]
+}%endboxset
+\boxset{The Banach Contraction Principle}
+{Let $X$ be a complete metric space and the mapping $T: X \rightarrow X$ be a contraction. Then $T$ has exactly one fixed point.}%endboxset
+\boxset{(The cross ratio of four points)}
+{If $z_{1} \in \mathbb{C}_{\infty}$ then $\left(z_{1}, z_{2}, z_{3}, z_{4}\right)$ is the image of $z_{1}$ under the unique Möbius transformation which takes $z_{2}$ to $1, z_{3}$ to 0 , and $z_{4}$ to $\infty$.}%endboxset
+\boxset{If $z_{2}, z_{3}, z_{4}$ are distinct points and $T$ is any Möbius transformation then}
+{
+\[
+\left(z_{1}, z_{2}, z_{3}, z_{4}\right)=\left(T z_{1}, T z_{2}, T z_{3}, T z_{4}\right)
+\]
+for any point $z_{1}$. (Möbius transformations preserve cross ratios.)
+}%endboxset
+\boxset{(Unique Interpolation)}
+{If $z_{2}, z_{3}, z_{4}$ are distinct points in $\mathbb{C}_{\infty}$ and $\omega_{2}, \omega_{3}, \omega_{4}$ are also distinct points of $\mathbb{C}_{\infty}$, then there is one and only one Möbius transformation $S$ such that $S z_{2}=\omega_{2}, S z_{3}=\omega_{3}, S z_{4}=\omega_{4}$.}%endboxset
+\boxset{Let $z_{1}, z_{2}, z_{3}, z_{4}$ be four distinct points in $\mathbb{C}_{\infty}$.}
+{Then $\left(z_{1}, z_{2}, z_{3}, z_{4}\right)$ is a real number if and only if all four points lie on a circle.}%endboxset
+\boxset{For any given circles $\Gamma$ and $\Gamma^{\prime}$ in $\mathbb{C}_{\infty}$ there is a Möbius transformation $T$ such that}
+{$T(\Gamma)=\Gamma^{\prime}$. Furthermore we can specify that $T$ take any three points on $\Gamma$ onto any three points of $\Gamma^{\prime}$. If we do specify $T z_{j}$ for $j=2,3,4$ (distinct $z_{j}$ in $\Gamma$ ) then $T$ is unique.}%endboxset
+\boxset{Casorati-Weierstrass Theorem.}
+{Suppose that $f$ has an essential singularity at $z=a$, and let $\delta>0$. Then
+\[
+\{f[\operatorname{ann}(a ; 0, \delta)]\}^{-}=\mathbb{C} .
+\]
+}%endboxset
+\boxset{Maximum Modulus Theorem-First Version.}
+{If $f$ is analytic in a region $G$ and $a$ is a point in $G$ with $|f(a)| \geq|f(z)|$ for all $z$ in $G$ then $f$ must be a constant function.}%endboxset
+\boxset{Maximum Modulus Theorem-Second Version.}
+{Let $G$ be a bounded open set in $\mathbb{C}$ and suppose $f$ is a continuous function on $G^{-}$which is analytic in $G$. Then
+\[
+\max \left\{|f(z)|: z \in G^{-}\right\}=\max \{|f(z)|: z \in \partial G\} .
+\]
+}%endboxset
+\boxset{Maximum Modulus Theorem-Third Version.}
+{Let $G$ be a region in $\mathbb{C}$ and $f$ an analytic function on $G$. Suppose there is a constant $M$ such that $\limsup |f(z)| \leq M$ for all a in $\partial_{\infty} G$. Then $|f(z)| \leq M$ for all $z$ in $G$.}%endboxset
+\boxset{If $G$ is open in $\mathbb{C}$ then there is a sequence $\left\{K_{n}\right\}$ of compact subsets of $G$ such that $G=\bigcup_{n=1}^{\infty} K_{n}$. Moreover, the sets $K_{n}$ can be chosen to satisfy the following conditions:}
+{
+(a) $K_{n} \subset$ int $K_{n+1}$;\[\ \]
+(b) $K \subset G$ and $K$ compact implies $K \subset K_{n}$ for some $n$;\[\ \]
+(c) Every component of $\mathbb{C}_{\infty}-K_{n}$ contains a component of $\mathbb{C}_{\infty}-G$.
+}%endboxset
+\boxset{The Weierstrass Factorization Theorem.}
+{Let $f$ be an entire function and let $\left\{a_{n}\right\}$ be the non-zero zeros of $f$ repeated according to multiplicity; suppose $f$ has a zero at $z=0$ of order $m \geqslant 0$ ( $a$ zero of order $m=0$ at $z=0$ means $f(0) \neq 0)$. Then there is an entire function $g$ and a sequence of integers $\left\{p_{n}\right\}$ such that
+
+\[
+f(z)=z^{m} e^{g(z)} \prod_{n=1}^{\infty} E_{p_{n}}\left(\frac{z}{a_{n}}\right) .
+\]
+}%endboxset
+\boxset{If $f$ is a meromorphic function on an open set $G$ then}
+{there are analytic functions $g$ and $h$ on $G$ such that $f=g / h$.}%endboxset
+\boxset{$\sin \pi z=$}
+{
+\[
+\sin \pi z=\pi z \prod_{n=1}^{\infty}\left(1-\frac{z^{2}}{n^{2}}\right)
+\]
+}%endboxset
+\boxset{The gamma function, $\Gamma(z)$, is the meromorphic function on with simple poles at $z=0,-1, \ldots$ defined by}
+{
+\[
+\Gamma(z)=\frac{e^{-\gamma z}}{z} \prod_{n=1}^{\infty}\left(1+\frac{z}{n}\right)^{-1} e^{z / n}
+\]
+where $\gamma$ is a constant chosen so that $\Gamma(1)=1$.
+}%endboxset
+\boxset{Bohr-Mollerup Theorem}
+{Let $f$ be a function defined on $(0, \infty)$ such that $f(x)>0$ for all $x>0$. Suppose that $f$ has the following properties:\[\ \]
+(a) $\log f(x)$ is a convex function;\[\ \]
+(b) $f(x+1)=x f(x)$ for all $x$;\[\ \]
+(c) $f(1)=1$.\[\ \]
+Then $f(x)=\Gamma(x)$ for all $x$.\[\ \]
+}%endboxset
+\boxset{If $\operatorname{Re} z>0$ then}
+{
+\[
+\Gamma(z)=\int_{0}^{\infty} e^{-t} t^{z-1} d t
+\]
+}%endboxset
+\boxset{Runge's Theorem.}
+{Let $K$ be a compact subset of $\mathbb{C}$ and let $E$ be a subset of $\mathbb{C}_{\infty}-K$ that meets each component of $\mathbb{C}_{\infty}-K$. If $f$ is analytic in an open set containing $K$ and $\epsilon>0$ then there is a rational function $R(z)$ whose only poles lie in $E$ and such that
+\[
+|f(z)-R(z)|<\epsilon
+\]
+}%endboxset
+\boxset{Mittag-Leffler's Theorem.}
+{Let $G$ be an open set, $\left\{a_{k}\right\}$ a sequence of distinct points in $G$ without a limit point in $G$, and let $\left\{S_{k}(z)\right\}$ be the sequence of rational functions given by equation (3.1). Then there is a meromorphic function $f$ on $G$ whose poles are exactly the points $\left\{a_{k}\right\}$ and such that the singular part of $f$ at $a_{k}$ is $S_{k}(z)$.}%endboxset
+\boxset{The function $P_r$}
+{
+\[
+P_{r}(\theta)=\sum_{n=-\infty}^{\infty} r^{|n|} e^{i n \theta},
+\]
+for $0 \leq r<1$ and $-\infty<\theta<\infty$, is called the Poisson kernel.
+\[
+P_{r}(\theta)=\frac{1-r^{2}}{1-2 r \cos \theta+r^{2}}=\operatorname{Re}\left(\frac{1+r e^{i \theta}}{1-r e^{i \theta}}\right)
+\]
+}%endboxset
+\boxset{The Poisson kernel satisfies the following:}
+{
+(a) $\frac{1}{2 \pi} \int_{-\pi}^{\pi} P_{r}(\theta) d \theta=1$\[\ \]
+(b) $P_{r}(\theta)>0$ for all $\theta, P_{r}(-\theta)=P_{r}(\theta)$, and $P_{r}$ is periodic in $\theta$ with period $2 \pi$;\[\ \]
+(c) $P_{r}(\theta)<P_{r}(\delta)$ if $0<\delta<|\theta| \leq \pi$;\[\ \]
+(d) for each $\delta>0, \lim _{r \rightarrow 1^{-}} P_{r}(\theta)=0$ uniformly in $\theta$ for $\pi \geq|\theta| \geq \delta$.
+}%endboxset
+\boxset{Let $D=\{z:|z|<1\}$ and suppose that $f: \partial D \rightarrow \mathbb{R}$ is a continuous function. Then}
+{there is a continuous function $u: D^{-} \rightarrow \mathbb{R}$ such that\[\ \]
+(a) $u(z)=f(z)$ for $z$ in $\partial D$;\[\ \]
+(b) $u$ is harmonic in $D$.\[\ \]
+Moreover $u$ is unique and is defined by the formula $2.5$
+\[
+u\left(r e^{i \theta}\right)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} P_{r}(\theta-t) f\left(e^{i t}\right) d t
+\]
+for $0 \leq r<1,0 \leq \theta \leq 2 \pi$.
+}%endboxset
+\boxset{If $u: D^{-} \rightarrow \mathbb{R}$ is a continuous function that is harmonic in $D$}
+{
+then
+\[
+u\left(r e^{i \theta}\right)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} P_{r}(\theta-t) u\left(e^{i t}\right) d t
+\]
+for $0 \leq r<1$ and all $\theta$. Moreover, $u$ is the real part of the analytic function
+\[
+f(z)=\frac{1}{2 \pi} \int_{-\pi}^{\pi} \frac{e^{i t}+z}{e^{i t}-z} u\left(e^{i t}\right) d t
+\]
+}%endboxset
+\boxset{If $u: G \rightarrow \mathbb{R}$ is a continuous function which has the MVP then}
+{$u$ is harmonic.}%endboxset
+\boxset{Harnack's Inequality}
+{If $u: \bar{B}(a ; R) \rightarrow \mathbb{R}$ is continuous, harmonic in $B(a ; R)$, and $u \geq 0$ then for $0 \leq r<R$ and all $\theta$
+\[
+\frac{R-r}{R+r} u(a) \leq u\left(a+r e^{i \theta}\right) \leq \frac{R+r}{R-r} u(a)
+\]
+}%endboxset
+\boxset{$\sigma$-algebra}
+{
+A collection of subsets of $\mathbf{R}$ is called an $\sigma$-algebra provided it contains $\mathbf{R}$ and is closed with respect to the formation of complements and countable unions; by De Morgan's Identities, such a collection is also closed with respect to the formation of countable intersections. The preceding proposition tells us that the collection of measurable sets is a $\sigma$-algebra.
+}%endboxset
+\boxset{Borel set}
+{
+The intersection of all the $\sigma$-algebras of subsets of $\mathbf{R}$ that contain the open sets is a $\sigma$-algebra called the Borel $\sigma$-algebra; members of this collection are called Borel sets.
+}%endboxset
+\boxset{Measurable set}
+{
+The collection $\mathcal{M}$ of measurable sets is a $\sigma$-algebra that contains the $\sigma$-algebra $\mathcal{B}$ of Borel sets. Each interval, each open set, each closed set, each $G_{\delta}$ set, and each $F_{\sigma}$ set is measurable.
+}%endboxset
+\boxset{A property that holds almost everywhere}
+{
+For a measurable set $E$, we say that a property holds almost everywhere on $E$, or it holds for almost all $x \in E$, provided there is a subset $E_{0}$ of $E$ for which $m\left(E_{0}\right)=0$ and the property holds for all $x \in E \sim E_{0}$.
+}%endboxset
+\boxset{The Cantor set}
+{
+We define the Cantor set $\mathbf{C}$ by
+\[
+\mathbf{C}=\bigcap_{k=1}^{\infty} C_{k} .
+\]
+The collection $\left\{C_{k}\right\}_{k=1}^{\infty}$ possesses the following two properties:\[\ \]
+(i) $\left\{C_{k}\right\}_{k=1}^{\infty}$ is a descending sequence of closed sets;\[\ \]
+(ii) For each $k, C_{k}$ is the disjoint union of $2^{k}$ closed intervals, each of length $1 / 3^{k}$.
+}%endboxset
+\boxset{The Cantor-Lebesgue function $\varphi$}
+{
+The Cantor-Lebesgue function $\varphi$ is an increasing continuous function that maps $[0,1]$ onto $[0,1]$. Its derivative exists on the open set $\mathcal{O}$, the complement in $[0,1]$ of the Cantor set,
+\[
+\varphi^{\prime}=0 \text { on } \mathcal{O} \text { while } m(\mathcal{O})=1
+\]
+}%endboxset
+\boxset{Measurable function}
+{
+Let the function $f$ have a measurable domain $E$. Then the following statements are equivalent:\[\ \]
+(i) For each real number $c$, the set $\{x \in E \mid f(x)>c\}$ is measurable.\[\ \]
+(ii) For each real number $c$, the set $\{x \in E \mid f(x) \geq c\}$ is measurable.\[\ \]
+(iii) For each real number $c$, the set $\{x \in E \mid f(x)<c\}$ is measurable.\[\ \]
+(iv) For each real number $c$, the set $\{x \in E \mid f(x) \leq c\}$ is measurable.\[\ \]
+Each of these properties implies that for each extended real number $c$, the set $\{x \in E \mid f(x)=c\}$ is measurable.
+}%endboxset
+\boxset{Upper and lower Riemann integrals of a bounded function}
+{
+Define the lower and upper Darboux sums for $f$ with respect to $P$, respectively, by
+\[
+L(f, P)=\sum_{i=1}^{n} m_{i} \cdot\left(x_{i}-x_{i-1}\right)
+\]
+and
+\[
+U(f, P)=\sum_{i=1}^{n} M_{i} \cdot\left(x_{i}-x_{i-1}\right),
+\]
+where, ${ }^{1}$ for $1 \leq i \leq n$,
+\[
+m_{i}=\inf \left\{f(x) \mid x_{i-1}<x<x_{i}\right\} \text { and } M_{i}=\sup \left\{f(x) \mid x_{i-1}<x<x_{i}\right\} .
+\]
+We then define the lower and upper Riemann integrals of $f$ over $[a, b]$, respectively, by
+$(R) \int_{a}^{b} f=\sup \{L(f, P) \mid P$ a partition of $[a, b]\}$
+and
+$(R) \bar{\int}_{a}^{b} f=\inf \{U(f, P) \mid P$ a partition of $[a, b]\}$
+}%endboxset
+\boxset{Upper and lower Lebesgue integrals of a measurable function}
+{
+Let $f$ be a bounded real-valued function defined on a set of finite measure $E$. By analogy with the Riemann integral, we define the lower and upper Lebesgue integral, respectively, of $f$ over $E$ to be
+\[
+\sup \left\{\int_{E} \varphi \mid \varphi \text { simple and } \varphi \leq f \text { on } E,\right\}
+\]
+and
+\[
+\inf \left\{\int_{E} \psi \mid \psi \text { simple and } f \leq \psi \text { on } E\right\}
+\]
+}%endboxset
+\boxset{Lebesgue integrability of a bounded function on a measurable set of finite measure}
+{
+A bounded function $f$ on a domain $E$ of finite measure is said to be Lebesgue integrable over $E$ provided its upper and lower Lebesgue integrals over $E$ are equal. The common value of the upper and lower integrals is called the Lebesgue integral, or simply the integral, of $f$ over $E$ and is denoted by $\int_{E} f$.
+}%endboxset
+\boxset{Convergence in measure}
+{
+Let $\left\{f_{n}\right\}$ be a sequence of measurable functions on $E$ and $f$ a measurable function on $E$ for which $f$ and each $f_{n}$ is finite a.e. on $E$. The sequence $\left\{f_{n}\right\}$ is said to converge in measure on $E$ to $f$ provided for each $\eta>0$,
+\[
+\lim _{n \rightarrow \infty} m\left\{x \in E|| f_{n}(x)-f(x) \mid>\eta\right\}=0
+\]
+}%endboxset
+\boxset{Upper and lower derivatives of a function at a point in its domain}
+{
+For a real-valued function $f$ and an interior point $x$ of its domain, the upper derivative of $f$ at $x, \bar{D} f(x)$ and the lower derivative of $f$ at $x, \underline{D} f(x)$ are defined as follows:
+\[
+\begin{aligned}
+&\bar{D} f(x)=\lim _{h \rightarrow 0}\left[\sup _{0<|t| \leq h} \frac{f(x+t)-f(x)}{t}\right] \\
+&\underline{D} f(x)=\lim _{h \rightarrow 0}\left[\inf _{0<|t| \leq h} \frac{f(x+t)-f(x)}{t}\right] .
+\end{aligned}
+\]
+}%endboxset
+\boxset{Differentiability of a function at a point in its domain}
+{
+We say that $f$ is difierentiable at $x$ and define $f^{\prime}(x)$ to be the common value of the upper and lower derivatives.
+}%endboxset
+\boxset{Variation of function with respect to a partition}
+{
+Let $f$ be a real-valued function defined on the closed, bounded interval $[a, b]$ and $P=\left\{x_{0}, \ldots, x_{k}\right\}$ be a partition of $[a, b]$. Define the variation of $f$ with respect to $P$ by
+\[
+V(f, P)=\sum_{i=1}^{k}\left|f\left(x_{i}\right)-f\left(x_{i-1}\right)\right|
+\]
+}%endboxset
+\boxset{Total variation of a function}
+{
+\[T V(f)=\sup \{V(f, P) \mid P \text { a partition of }[a, b]\}\]
+}%endboxset
+\boxset{Function of bounded variation}
+{
+A real-valued function $f$ on the closed, bounded interval $[a, b]$ is said to be of bounded variation on $[a, b]$ provided
+\[
+T V(f)<\infty
+\]
+}%endboxset
+\boxset{Absolute continuity of a function on a closed, bounded interval}
+{
+A real-valued function $f$ on a closed, bounded interval $[a, b]$ is said to be absolutely continuous on $[a, b]$ provided for each $\epsilon>0$, there is $a \delta>0$ such that for every finite disjoint collection $\left\{\left(a_{k}, b_{k}\right)\right\}_{k=1}^{n}$ of open intervals in $(a, b)$,
+\[
+\text { if } \sum_{k=1}^{n}\left[b_{k}-a_{k}\right]<\delta \text {, then } \sum_{k=1}^{n}\left|f\left(b_{k}\right)-f\left(a_{k}\right)\right|<\epsilon
+\]
+}%endboxset
+\boxset{Lipschitz function}
+{
+The function $f$ is said to be Lipschitz provided there is a $c \geq 0$ for which
+\[
+\left|f\left(x^{\prime}\right)-f(x)\right| \leq c \cdot\left|x^{\prime}-x\right| \text { for all } x^{\prime}, x \in E .
+\]
+}%endboxset
+\boxset{Total variation function}
+{
+Therefore the function $x \mapsto T V\left(f_{[a, x]}\right)$, which we call the total variation function for $f$, is a real-valued increasing function on $[a, b]$. Moreover, for $a \leq u<v \leq b$, if we take the crudest partition $P=\{u, v\}$ of $[u, v]$, we have
+\[
+f(u)-f\left(v_{0}\right) \leq|f(v)-f(u)|=V\left(f_{[u, v]}, P\right) \leq T V\left(f_{[u, v]}\right)=T V\left(f_{[a, v]}\right)-T V\left(f_{[a, u]}\right) .
+\]
+Thus
+\[
+f(v)+T V\left(f_{[a, v]}\right) \geq f(u)+T V\left(f_{[a, u]}\right) \text { for all } a \leq u<v \leq b
+\]
+}%endboxset
+\boxset{Divided difference function and Average value function}
+{
+Let $f$ be integrable over the closed, bounded interval $[a, b]$. Extend $f$ to take the value $f(b)$ on $(b, b+1]$. For $0<h \leq 1$, define the divided difierence function Diff $h$ and average value function $\mathrm{Av}_{h} f$ of $[a, b]$ by
+$\operatorname{Diff}_{h} f(x)=\frac{f(x+h)-f(x)}{h}$ and $\operatorname{Av}_{h} f(x)=\frac{1}{h} \cdot \int_{x}^{x+h} f$ for all $x \in[a, b]$
+By a change of variables in the integral and cancellation, for all $a \leq u<v \leq b$,
+\[
+\int_{u}^{v} \operatorname{Diff}_{h} f=\mathrm{Av}_{h} f(v)-\mathrm{Av}_{h} f(u)
+\]
+}%endboxset
+\boxset{A cover of a set in the sense of Vitali}
+{
+A collection $\mathcal{F}$ of closed, bounded, nondegenerate intervals is said to cover a set $E$ in the sense of Vitali provided for each point $x$ in $E$ and $\epsilon>0$, there is an interval I in $\mathcal{F}$ that contains $x$ and has $\ell(I)<\epsilon$.
+}%endboxset
+\boxset{Uniform integrability}
+{
+A family $\mathcal{F}$ of measurable functions on $E$ is said to be uniformly integrable over $E$ provided for each $\epsilon>0$, there is a $\delta>0$ such that for each $f \in \mathcal{F}$,
+\[
+\text { if } A \subseteq E \text { is measurable and } m(A)<\delta \text {, then } \int_{A}|f|<\epsilon
+\]
+}%endboxset
+\boxset{Essentially bounded function}
+{
+We call a function $f \in \mathcal{F}$ essentially bounded provided there is some $M \geq 0$, called an essential upper bound for $f$, for which
+\[
+|f(x)| \leq M \text { for almost all } x \in E
+\]
+}%endboxset
+\boxset{Essential supremum of a function}
+{
+For a function $f$ in $L^{\infty}(E)$, define $\|f\|_{\infty}$ to be the infimum of the essential upper bounds for $f$. We call $\|f\|_{\infty}$ the essential supremum of $f$ and claim that $\|\cdot\|_{\infty}$ is a norm on $L^{\infty}(E)$.
+}%endboxset
+\boxset{Linear functional on a linear space}
+{
+A linear functional on a linear space $X$ is a real-valued function $T$ on $X$ such that for $g$ and $h$ in $X$ and $\alpha$ and $\beta$ real numbers,
+\[
+T(\alpha \cdot g+\beta \cdot h)=\alpha \cdot T(g)+\beta \cdot T(h)
+\]
+}%endboxset
+\boxset{Bounded linear functional on a normed linear space}
+{
+For a normed linear space $X$, a linear functional $T$ on $X$ is said to be bounded provided there is an $M \geq 0$ for which
+\[
+|T(f)| \leq M \cdot\|f\| \text { for all } f \in X
+\]
+The infimum of all such $M$ is called the norm of $T$ and denoted by $\|T\|_{*}$.
+}%endboxset
+\boxset{Metric on a nonempty set}
+{
+Let $X$ be a nonempty set. A function $\rho: X \times X \rightarrow \mathbf{R}$ is called a metric provided for all $x, y$, and $z$ in $X$\[\ \]
+(i) $\rho(x, y) \geq 0$;\[\ \]
+(ii) $\rho(x, y)=0$ if and only if $x=y$;\[\ \]
+(iii) $\rho(x, y)=\rho(y, x)$;\[\ \]
+(iv) $\rho(x, y) \leq \rho(x, z)+\rho(z, y)$.
+}%endboxset
+\boxset{Point of closure of a subset $E$ of a metric space $X$}
+{
+For a set $E$ of real numbers, a real number $x$ is called a point of closure of $E$ provided every open interval that contains $x$ also contains a point in $E$. The collection of points of closure of $E$ is called the closure of $E$ and denoted by $\bar{E}$.
+}%endboxset
+\boxset{Separable metric space}
+{
+A subset $D$ of a metric space $X$ is said to be dense in $X$ provided every nonempty open subset of $X$ contains a point of $D$. A metric space $X$ is said to be separable provided there is a countable subset of $X$ that is dense in $X$.
+}%endboxset
+\boxset{Contracting sequence of subsets of a metric space}
+{
+For a nonempty subset $E$ of a metric space $(X, \rho)$, we define the diameter of $E$, $\operatorname{diam} E, b y$
+\[
+\operatorname{diam} E=\sup \{\rho(x, y) \mid x, y \in E\}
+\]
+We say $E$ is bounded provided it has finite diameter. A descending sequence $\left\{E_{n}\right\}_{n=1}^{\infty}$ of nonempty subsets of $X$ is called a contracting sequence provided
+\[
+\lim _{n \rightarrow \infty} \operatorname{diam}\left(E_{n}\right)=0
+\]
+}%endboxset
+\boxset{Compact metric space}
+{
+A metric space $X$ is called compact provided every open cover of $X$ has a finite subcover. A subset $K$ of $X$ is called compact provided $K$, considered as a metric subspace of $X$, is compact.
+}%endboxset
+\boxset{Sequentially compact metric space}
+{
+A metric space $X$ is said to be sequentially compact provided every sequence in $X$ has a subsequence that converges to a point in $X$.
+}%endboxset
+\boxset{Totally bounded metric space}
+{
+A metric space $X$ is said to be totally bounded provided for each $\epsilon>0$, the space $X$ can be covered by a finite number of open balls of radius $\epsilon.$ A subset $E$ of $X$ is called totally bounded provided that $E$, considered as a subspace of the metric space $X$, is totally bounded.
+}%endboxset
+\boxset{Lebesgue number for an open cover}
+{
+If $\left\{\mathcal{O}_{\lambda}\right\}_{\lambda \in \Lambda}$ is an open cover of a metric space $X$, then each point $x \in X$ is contained in a member of the cover, $\mathcal{O}_{\lambda}$, and since $\mathcal{O}_{\lambda}$ is open, there is some $\epsilon>0$, such that
+\[
+B(x, \epsilon) \subseteq \mathcal{O}_{\lambda}
+\]
+In general, the $\epsilon$ depends on the choice of $x$. The following proposition tells us that for a compact metric space this containment holds uniformly in the sense that we can find $\epsilon$ independently of $x \in X$ for which the inclusion (4) holds. A positive number $\epsilon$ with this property is called a Lebesgue number for the $\operatorname{cover}\left\{\mathcal{O}_{\lambda}\right\}_{\lambda \in \Lambda}$.
+}%endboxset
+\boxset{Nowhere dense subset of a metric space}
+{
+A subset $E$ of a metric space $X$ is called nowhere dense provided its closure $\bar{E}$ is hollow.
+}
+
+\end{document}
